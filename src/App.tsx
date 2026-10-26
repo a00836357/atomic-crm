@@ -55,6 +55,7 @@ const App = () => (
   <CRM
     title="OptimaxxPlus CRM"
     currency="MXN"
+    disableTelemetry
     dealStages={dealStages}
     dealCategories={dealCategories}
     dealPipelineStatuses={["won"]}
