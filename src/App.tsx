@@ -18,19 +18,49 @@ import { CRM } from "@/components/atomic-crm/root/CRM";
  *
  * Logos must be an imported asset, an absolute URL, or a data URI — never a
  * route-relative path like "./img/logo.png", which breaks on nested routes.
- *
- * @example
- * import logoDark from "./logo-dark.svg";
- * import logoLight from "./logo-light.svg";
- *
- * const App = () => (
- *    <CRM
- *       darkModeLogo={logoDark}
- *       lightModeLogo={logoLight}
- *       title="Acme CRM"
- *    />
- * );
  */
-const App = () => <CRM />;
+
+// Stage values "opportunity", "won" and "lost" are kept from the defaults
+// because the dashboard charts filter on them.
+const dealStages = [
+  { value: "opportunity", label: "Contacto inicial" },
+  { value: "appointment", label: "Cita agendada" },
+  { value: "proposal-sent", label: "Propuesta enviada" },
+  { value: "won", label: "Cerrado" },
+  { value: "lost", label: "No interesado" },
+];
+
+const dealCategories = [{ value: "optimaxx-plus", label: "OptimaxxPlus" }];
+
+const noteStatuses = [
+  { value: "cold", label: "Frío", color: "#7dbde8" },
+  { value: "warm", label: "Tibio", color: "#e8cb7d" },
+  { value: "hot", label: "Caliente", color: "#e88b7d" },
+  { value: "in-contract", label: "Cliente", color: "#a4e87d" },
+];
+
+const taskTypes = [
+  { value: "none", label: "Ninguno" },
+  { value: "call", label: "Llamada" },
+  { value: "whatsapp", label: "WhatsApp" },
+  { value: "meeting", label: "Cita" },
+  { value: "presentation", label: "Presentación" },
+  { value: "follow-up", label: "Seguimiento" },
+  { value: "quarterly-review", label: "Revisión trimestral" },
+  { value: "greeting", label: "Felicitación" },
+  { value: "email", label: "Correo" },
+];
+
+const App = () => (
+  <CRM
+    title="OptimaxxPlus CRM"
+    currency="MXN"
+    dealStages={dealStages}
+    dealCategories={dealCategories}
+    dealPipelineStatuses={["won"]}
+    noteStatuses={noteStatuses}
+    taskTypes={taskTypes}
+  />
+);
 
 export default App;

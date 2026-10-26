@@ -70,6 +70,14 @@ export const englishCrmMessages = {
         misc: "Misc",
         personal_info: "Personal info",
         position: "Position",
+        prospect: "Prospecting",
+      },
+      lead_sources: {
+        referral: "Referral",
+        social: "Social media",
+        event: "Event",
+        organic: "Organic",
+        other: "Other",
       },
       fields: {
         first_name: "First name",
@@ -85,6 +93,11 @@ export const englishCrmMessages = {
         background: "Background info (bio, how you met, etc)",
         has_newsletter: "Has newsletter",
         sales_id: "Account manager",
+        city: "City",
+        birthday: "Birthday",
+        wedding_anniversary: "Wedding anniversary",
+        lead_source: "Source",
+        referred_by: "Referred by",
       },
       action: {
         add: "Add contact",
@@ -191,6 +204,15 @@ export const englishCrmMessages = {
         amount: "Budget",
         expected_closing_date: "Expected closing date",
         stage: "Stage",
+        plan_start: "Plan start",
+        plan_years: "Term (years)",
+        payment_status: "Payment status",
+        month19_contacted: "Month 19 follow-up done",
+      },
+      payment_statuses: {
+        current: "Up to date",
+        late: "Late",
+        to_verify: "To verify",
       },
       action: {
         back_to_deal: "Back to deal",
@@ -199,6 +221,7 @@ export const englishCrmMessages = {
       },
       field_categories: {
         misc: "Misc",
+        policy: "Policy",
       },
       filters: {
         only_mine: "Only deals I manage",

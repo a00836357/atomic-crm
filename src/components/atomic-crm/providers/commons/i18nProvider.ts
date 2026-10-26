@@ -6,6 +6,8 @@ import { raSupabaseEnglishMessages } from "ra-supabase-language-english";
 import { raSupabaseFrenchMessages } from "ra-supabase-language-french";
 import { englishCrmMessages } from "./englishCrmMessages";
 import { frenchCrmMessages } from "./frenchCrmMessages";
+import { spanishCrmMessages } from "./spanishCrmMessages";
+import { spanishRaMessages } from "./spanishRaMessages";
 
 const raSupabaseEnglishMessagesOverride = {
   "ra-supabase": {
@@ -57,28 +59,29 @@ const frenchCatalog = mergeTranslations(
   frenchCrmMessages,
 );
 
-export const getInitialLocale = (): "en" | "fr" => {
-  if (typeof navigator === "undefined") {
-    return "en";
-  }
+const spanishCatalog = mergeTranslations(
+  englishCatalog,
+  spanishRaMessages,
+  spanishCrmMessages,
+);
 
-  const browserLocale = navigator.languages?.[0] ?? navigator.language;
-  if (browserLocale?.toLowerCase().startsWith("fr")) {
-    return "fr";
-  }
-
-  return "en";
-};
+// This CRM is used in Mexico, so Spanish is the default whatever the browser
+// language; English and French stay available in the language menu.
+export const getInitialLocale = (): "es" | "en" | "fr" => "es";
 
 export const i18nProvider = polyglotI18nProvider(
   (locale) => {
     if (locale === "fr") {
       return frenchCatalog;
     }
-    return englishCatalog;
+    if (locale === "en") {
+      return englishCatalog;
+    }
+    return spanishCatalog;
   },
   getInitialLocale(),
   [
+    { locale: "es", name: "Español" },
     { locale: "en", name: "English" },
     { locale: "fr", name: "Français" },
   ],

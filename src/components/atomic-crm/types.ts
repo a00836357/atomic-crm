@@ -101,6 +101,11 @@ export type Contact = {
   status: string;
   background: string;
   phone_jsonb: PhoneNumberAndType[];
+  city?: string | null;
+  birthday?: string | null;
+  wedding_anniversary?: string | null;
+  lead_source?: string | null;
+  referred_by?: string | null;
   nb_tasks?: number;
   company_name?: string;
 } & Pick<RaRecord, "id">;
@@ -128,6 +133,10 @@ export type Deal = {
   expected_closing_date: string;
   sales_id: Identifier;
   index: number;
+  plan_start?: string | null;
+  plan_years?: number | null;
+  payment_status?: string | null;
+  month19_contacted?: boolean;
 } & Pick<RaRecord, "id">;
 
 export type DealNote = {

@@ -1,4 +1,6 @@
 import { required, useTranslate } from "ra-core";
+import { AutocompleteArrayInput } from "@/components/admin/autocomplete-array-input";
+import { BooleanInput } from "@/components/admin/boolean-input";
 import { ReferenceArrayInput } from "@/components/admin/reference-array-input";
 import { ReferenceInput } from "@/components/admin/reference-input";
 import { TextInput } from "@/components/admin/text-input";
@@ -23,6 +25,8 @@ export const DealInputs = () => {
         <Separator orientation={isMobile ? "horizontal" : "vertical"} />
         <DealMiscInputs />
       </div>
+
+      <DealPolicyInputs />
     </div>
   );
 };
@@ -43,17 +47,17 @@ const DealLinkedToInputs = () => {
       <h6 className="text-lg font-semibold">
         {translate("resources.deals.inputs.linked_to")}
       </h6>
-      <ReferenceInput source="company_id" reference="companies">
-        <AutocompleteCompanyInput
-          label="resources.deals.fields.company_id"
-          validate={required()}
-          modal
-        />
-      </ReferenceInput>
-
       <ReferenceArrayInput source="contact_ids" reference="contacts_summary">
         <AutocompleteContactInput label="resources.deals.fields.contact_ids" />
       </ReferenceArrayInput>
+
+      {/* Optional: OptimaxxPlus plans are sold to individuals */}
+      <ReferenceInput source="company_id" reference="companies">
+        <AutocompleteCompanyInput
+          label="resources.deals.fields.company_id"
+          modal
+        />
+      </ReferenceInput>
     </div>
   );
 };
@@ -72,6 +76,7 @@ const DealMiscInputs = () => {
         choices={dealCategories}
         optionText="label"
         optionValue="value"
+        defaultValue={dealCategories[0] ? [dealCategories[0].value] : []}
         helperText={false}
       />
       <NumberInput
@@ -95,6 +100,33 @@ const DealMiscInputs = () => {
         helperText={false}
         validate={required()}
       />
+    </div>
+  );
+};
+
+const paymentStatuses = ["current", "late", "to_verify"] as const;
+
+const DealPolicyInputs = () => {
+  const translate = useTranslate();
+  const paymentStatusChoices = paymentStatuses.map((value) => ({
+    id: value,
+    name: translate(`resources.deals.payment_statuses.${value}`),
+  }));
+  return (
+    <div className="flex flex-col gap-4">
+      <h6 className="text-lg font-semibold">
+        {translate("resources.deals.field_categories.policy")}
+      </h6>
+      <div className="grid gap-4 md:grid-cols-3">
+        <DateInput source="plan_start" helperText={false} />
+        <NumberInput source="plan_years" min={1} helperText={false} />
+        <SelectInput
+          source="payment_status"
+          choices={paymentStatusChoices}
+          helperText={false}
+        />
+      </div>
+      <BooleanInput source="month19_contacted" helperText={false} />
     </div>
   );
 };

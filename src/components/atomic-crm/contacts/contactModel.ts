@@ -2,6 +2,14 @@ import { Mars, NonBinary, Venus } from "lucide-react";
 
 import type { Company, Contact, ContactGender } from "../types";
 
+export const leadSources = [
+  "referral",
+  "social",
+  "event",
+  "organic",
+  "other",
+] as const;
+
 export const defaultEmailJsonb = [{ email: null, type: null }];
 export const defaultPhoneJsonb = [{ number: null, type: null }];
 

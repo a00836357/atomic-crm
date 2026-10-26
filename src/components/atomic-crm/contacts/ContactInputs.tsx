@@ -17,6 +17,7 @@ import { RadioButtonGroupInput } from "@/components/admin/radio-button-group-inp
 import { SelectInput } from "@/components/admin/select-input";
 import { ArrayInput } from "@/components/admin/array-input";
 import { SimpleFormIterator } from "@/components/admin/simple-form-iterator";
+import { DateInput } from "@/components/admin/date-input";
 
 import { isLinkedinUrl } from "../misc/isLinkedInUrl";
 import { StatusSelector } from "../notes";
@@ -25,6 +26,7 @@ import { Avatar } from "./Avatar";
 import { AutocompleteCompanyInput } from "../companies/AutocompleteCompanyInput.tsx";
 import {
   contactGender,
+  leadSources,
   translateContactGenderLabel,
   translatePersonalInfoTypeLabel,
 } from "./contactModel.ts";
@@ -41,6 +43,7 @@ export const ContactInputs = () => {
         <div className="flex flex-col gap-10 flex-1">
           <ContactIdentityInputs />
           <ContactPositionInputs />
+          <ContactProspectInputs />
         </div>
         {isMobile ? null : (
           <Separator orientation="vertical" className="flex-shrink-0" />
@@ -89,6 +92,30 @@ const ContactPositionInputs = () => {
       <ReferenceInput source="company_id" reference="companies" perPage={10}>
         <AutocompleteCompanyInput label="resources.contacts.fields.company_id" />
       </ReferenceInput>
+    </div>
+  );
+};
+
+const ContactProspectInputs = () => {
+  const translate = useTranslate();
+  const leadSourceChoices = leadSources.map((value) => ({
+    id: value,
+    name: translate(`resources.contacts.lead_sources.${value}`),
+  }));
+  return (
+    <div className="flex flex-col gap-4">
+      <h6 className="text-lg font-semibold">
+        {translate("resources.contacts.field_categories.prospect")}
+      </h6>
+      <TextInput source="city" helperText={false} />
+      <DateInput source="birthday" helperText={false} />
+      <DateInput source="wedding_anniversary" helperText={false} />
+      <SelectInput
+        source="lead_source"
+        choices={leadSourceChoices}
+        helperText={false}
+      />
+      <TextInput source="referred_by" helperText={false} />
     </div>
   );
 };

@@ -73,6 +73,14 @@ export const frenchCrmMessages = {
         misc: "Divers",
         personal_info: "Informations personnelles",
         position: "Poste",
+        prospect: "Prospection",
+      },
+      lead_sources: {
+        referral: "Recommandation",
+        social: "Réseaux sociaux",
+        event: "Événement",
+        organic: "Organique",
+        other: "Autre",
       },
       fields: {
         first_name: "Prénom",
@@ -88,6 +96,11 @@ export const frenchCrmMessages = {
         background: "Informations de contexte",
         has_newsletter: "Abonné à la newsletter",
         sales_id: "Responsable de compte",
+        city: "Ville",
+        birthday: "Anniversaire",
+        wedding_anniversary: "Anniversaire de mariage",
+        lead_source: "Source",
+        referred_by: "Recommandé par",
       },
       action: {
         add: "Ajouter un contact",
@@ -195,6 +208,15 @@ export const frenchCrmMessages = {
         amount: "Budget",
         expected_closing_date: "Date de clôture prévue",
         stage: "Étape",
+        plan_start: "Début du plan",
+        plan_years: "Durée (années)",
+        payment_status: "Statut de paiement",
+        month19_contacted: "Suivi du mois 19 fait",
+      },
+      payment_statuses: {
+        current: "À jour",
+        late: "En retard",
+        to_verify: "À vérifier",
       },
       action: {
         back_to_deal: "Retour à l'affaire",
@@ -203,6 +225,7 @@ export const frenchCrmMessages = {
       },
       field_categories: {
         misc: "Divers",
+        policy: "Contrat",
       },
       filters: {
         only_mine: "Seulement les affaires que je gère",
