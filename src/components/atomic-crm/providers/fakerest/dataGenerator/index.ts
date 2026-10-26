@@ -13,6 +13,7 @@ export default (): Db => {
   const db = {} as Db;
   db.sales = generateSales(db);
   db.tags = generateTags(db);
+  db.message_templates = [];
   db.companies = generateCompanies(db);
   db.contacts = generateContacts(db);
   db.contact_notes = generateContactNotes(db);

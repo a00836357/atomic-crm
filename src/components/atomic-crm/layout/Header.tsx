@@ -23,6 +23,8 @@ const Header = () => {
     currentPath = "/contacts";
   } else if (matchPath("/clients/*", location.pathname)) {
     currentPath = "/clients";
+  } else if (matchPath("/messages/*", location.pathname)) {
+    currentPath = "/messages";
   } else if (matchPath("/companies/*", location.pathname)) {
     currentPath = "/companies";
   } else if (matchPath("/deals/*", location.pathname)) {
@@ -83,6 +85,11 @@ const Header = () => {
                     })}
                     to="/companies"
                     isActive={currentPath === "/companies"}
+                  />
+                  <NavigationTab
+                    label={translate("crm.messages.title")}
+                    to="/messages"
+                    isActive={currentPath === "/messages"}
                   />
                 </nav>
               </div>

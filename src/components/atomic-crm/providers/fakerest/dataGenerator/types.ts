@@ -8,6 +8,7 @@ import type {
   Tag,
   Task,
 } from "../../../types";
+import type { MessageTemplate } from "../../../messages/messagesModel";
 import type { ConfigurationContextValue } from "../../../root/ConfigurationContext";
 
 export interface Db {
@@ -19,5 +20,6 @@ export interface Db {
   sales: Sale[];
   tags: Tag[];
   tasks: Task[];
+  message_templates: MessageTemplate[];
   configuration: Array<{ id: number; config: ConfigurationContextValue }>;
 }

@@ -164,9 +164,12 @@ export const toWhatsAppNumber = (phone?: string | null) => {
   return digits.length === 10 ? `52${digits}` : digits;
 };
 
-export const whatsAppLink = (alert: CrmAlert) => {
+export const whatsAppLink = (
+  alert: CrmAlert,
+  message: string = alertMessage(alert),
+) => {
   const number = toWhatsAppNumber(alert.contact?.phone_jsonb?.[0]?.number);
-  const text = encodeURIComponent(alertMessage(alert));
+  const text = encodeURIComponent(message);
   return number
     ? `https://wa.me/${number}?text=${text}`
     : `https://wa.me/?text=${text}`;

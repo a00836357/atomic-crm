@@ -32,6 +32,7 @@ import type { Contact } from "../types";
 import { Avatar } from "./Avatar";
 import { ContactAside } from "./ContactAside";
 import { MobileBackButton } from "../misc/MobileBackButton";
+import { WhatsAppTemplateButton } from "../messages/WhatsAppTemplateButton";
 
 export const ContactShow = (props: ShowBaseProps = {}) => {
   const isMobile = useIsMobile();
@@ -91,6 +92,7 @@ const ContactShowContentMobile = () => {
             <h1 className="truncate text-xl font-semibold">{defaultTitle}</h1>
           </Link>
         </div>
+        <WhatsAppTemplateButton compact />
         <Button
           type="button"
           variant="ghost"

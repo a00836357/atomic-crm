@@ -437,6 +437,24 @@ export const spanishCrmMessages = {
     changelog: {
       title: "Novedades",
     },
+    messages: {
+      title: "Mensajes",
+      hint: "Los cambios se guardan al salir de cada bloque. [Nombre] y [Buenos días / Buenas tardes] se llenan solos al enviar desde un contacto; [X] con los años del plan en su aniversario.",
+      block: "Bloque %{number}",
+      copy_all: "Copiar todo",
+      saved: "Plantilla guardada",
+      empty:
+        "Aún no tienes plantillas. Cárgalas desde el respaldo de tu CRM anterior (crm-respaldo.json).",
+      import: "Cargar plantillas del respaldo",
+      imported:
+        "Se cargó %{smart_count} plantilla |||| Se cargaron %{smart_count} plantillas",
+      import_empty: "Ese archivo no trae plantillas de mensajes.",
+      import_error: "No se pudo leer el archivo. ¿Es crm-respaldo.json?",
+      send_whatsapp: "Enviar WhatsApp",
+      choose_template: "Elige la plantilla. Se abre WhatsApp sin enviar.",
+      no_phone_hint: "Sin teléfono: WhatsApp te pedirá elegir el chat.",
+      blank_message: "Mensaje en blanco",
+    },
     clients: {
       title: "Clientes",
       prospects: "Prospectos",

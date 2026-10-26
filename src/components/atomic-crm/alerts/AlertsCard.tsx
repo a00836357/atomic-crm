@@ -15,6 +15,13 @@ import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
+import {
+  ALERT_TEMPLATE_KEYS,
+  fillTemplate,
+  firstNameOf,
+  type MessageTemplate,
+} from "../messages/messagesModel";
+import { useMessageTemplates } from "../messages/useMessageTemplates";
 import type { Contact, Deal } from "../types";
 import {
   alertMessage,
@@ -88,7 +95,26 @@ export const AlertsCard = () => {
   );
 };
 
+/** The advisor's template for this alert type, or the built-in message */
+const messageFor = (alert: CrmAlert, templates: MessageTemplate[] = []) => {
+  const template = templates.find(
+    (t) => t.key === ALERT_TEMPLATE_KEYS[alert.type],
+  );
+  if (!template) return alertMessage(alert);
+  const years =
+    alert.type === "ppr" && alert.deal?.plan_start
+      ? Number(alert.date.slice(0, 4)) -
+        Number(alert.deal.plan_start.slice(0, 4))
+      : null;
+  return fillTemplate(template, {
+    firstName: firstNameOf(alert.contact?.first_name),
+    years,
+  });
+};
+
 const AlertItem = ({ alert }: { alert: CrmAlert }) => {
+  const { data: templates } = useMessageTemplates();
+  const message = messageFor(alert, templates);
   const translate = useTranslate();
   const notify = useNotify();
   const [update, { isPending: isMarking }] = useUpdate<Deal>();
@@ -99,7 +125,7 @@ const AlertItem = ({ alert }: { alert: CrmAlert }) => {
 
   const copyMessage = () =>
     navigator.clipboard
-      .writeText(alertMessage(alert))
+      .writeText(message)
       .then(() => notify("crm.common.copied"));
 
   const markMonth19Done = () => {
@@ -138,7 +164,11 @@ const AlertItem = ({ alert }: { alert: CrmAlert }) => {
       </div>
       <div className="flex flex-wrap gap-2 pl-8">
         <Button size="sm" variant="outline" asChild>
-          <a href={whatsAppLink(alert)} target="_blank" rel="noreferrer">
+          <a
+            href={whatsAppLink(alert, message)}
+            target="_blank"
+            rel="noreferrer"
+          >
             <MessageCircle className="h-4 w-4" />
             {translate("crm.alerts.whatsapp")}
           </a>

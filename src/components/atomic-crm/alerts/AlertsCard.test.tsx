@@ -67,6 +67,41 @@ describe("AlertsCard", () => {
       .not.toBeInTheDocument();
   });
 
+  it("sends the advisor's own template when there is one", async () => {
+    const screen = await render(
+      <StoryWrapper
+        data={{
+          contacts: [
+            buildContact({
+              id: 1,
+              first_name: "Ana",
+              birthday: isoDate(addDays(subMonths(new Date(), 12 * 30), 2)),
+              phone_jsonb: [{ number: "5512345678", type: "Work" }],
+            }),
+          ],
+          message_templates: [
+            {
+              id: 1,
+              position: 10,
+              key: "birthday",
+              title: "Cumpleaños",
+              blocks: ["Hola [Nombre]!", "Feliz cumpleaños!"],
+            },
+          ],
+        }}
+      >
+        <AlertsCard />
+      </StoryWrapper>,
+    );
+
+    await expect
+      .element(screen.getByRole("link", { name: /WhatsApp/ }))
+      .toHaveAttribute(
+        "href",
+        `https://wa.me/525512345678?text=${encodeURIComponent("Hola Ana!\n\nFeliz cumpleaños!")}`,
+      );
+  });
+
   it("says so when nothing is coming up", async () => {
     const screen = await render(
       <StoryWrapper data={{ contacts: [buildContact({ id: 1 })] }}>

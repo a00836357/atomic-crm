@@ -11,6 +11,7 @@ import { ContactStatusSelector } from "./ContactInputs";
 import { ContactPersonalInfo } from "./ContactPersonalInfo";
 import { ContactBackgroundInfo } from "./ContactBackgroundInfo";
 import { AsideSection } from "../misc/AsideSection";
+import { WhatsAppTemplateButton } from "../messages/WhatsAppTemplateButton";
 import type { Contact } from "../types";
 import { ContactMergeButton } from "./ContactMergeButton";
 import { ExportVCardButton } from "./ExportVCardButton";
@@ -29,6 +30,10 @@ export const ContactAside = ({ link = "edit" }: { link?: "edit" | "show" }) => {
         ) : (
           <ShowButton label="resources.contacts.action.show" />
         )}
+      </div>
+
+      <div className="mb-6">
+        <WhatsAppTemplateButton />
       </div>
 
       <AsideSection title={translate("resources.notes.fields.status")}>

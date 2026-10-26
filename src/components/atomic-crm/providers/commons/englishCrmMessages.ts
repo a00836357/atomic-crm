@@ -433,6 +433,24 @@ export const englishCrmMessages = {
     changelog: {
       title: "Changelog",
     },
+    messages: {
+      title: "Messages",
+      hint: "Changes are saved when you leave each block. [Nombre] and [Buenos días / Buenas tardes] are filled in when sending from a contact; [X] with the plan years on its anniversary.",
+      block: "Block %{number}",
+      copy_all: "Copy all",
+      saved: "Template saved",
+      empty:
+        "No templates yet. Load them from your former CRM backup (crm-respaldo.json).",
+      import: "Load templates from backup",
+      imported:
+        "Loaded %{smart_count} template |||| Loaded %{smart_count} templates",
+      import_empty: "That file has no message templates.",
+      import_error: "Could not read the file. Is it crm-respaldo.json?",
+      send_whatsapp: "Send WhatsApp",
+      choose_template: "Pick a template. WhatsApp opens without sending.",
+      no_phone_hint: "No phone: WhatsApp will ask you to pick the chat.",
+      blank_message: "Blank message",
+    },
     clients: {
       title: "Clients",
       prospects: "Prospects",

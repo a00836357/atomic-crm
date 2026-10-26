@@ -54,6 +54,7 @@ export const createCrmDb = (overrides: Partial<Db> = {}): Db =>
     deals: [],
     sales: [baseSale],
     tags: [],
+    message_templates: [],
     tasks: [],
     ...overrides,
   }) as Db;

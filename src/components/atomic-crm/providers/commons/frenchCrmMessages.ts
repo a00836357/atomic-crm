@@ -438,6 +438,24 @@ export const frenchCrmMessages = {
     changelog: {
       title: "Notes de version",
     },
+    messages: {
+      title: "Messages",
+      hint: "Les modifications sont enregistrées en quittant chaque bloc. [Nombre] et [Buenos días / Buenas tardes] sont remplis à l'envoi depuis un contact ; [X] avec les années du plan à son anniversaire.",
+      block: "Bloc %{number}",
+      copy_all: "Tout copier",
+      saved: "Modèle enregistré",
+      empty:
+        "Aucun modèle pour l'instant. Chargez-les depuis la sauvegarde de votre ancien CRM (crm-respaldo.json).",
+      import: "Charger les modèles",
+      imported:
+        "%{smart_count} modèle chargé |||| %{smart_count} modèles chargés",
+      import_empty: "Ce fichier ne contient pas de modèles de messages.",
+      import_error: "Impossible de lire le fichier. Est-ce crm-respaldo.json ?",
+      send_whatsapp: "Envoyer un WhatsApp",
+      choose_template: "Choisissez un modèle. WhatsApp s'ouvre sans envoyer.",
+      no_phone_hint: "Pas de téléphone : WhatsApp vous demandera le chat.",
+      blank_message: "Message vide",
+    },
     clients: {
       title: "Clients",
       prospects: "Prospects",
