@@ -107,6 +107,8 @@ export type Contact = {
   lead_source?: string | null;
   referred_by?: string | null;
   nb_tasks?: number;
+  /** computed by contacts_summary: has an active closed plan */
+  is_client?: boolean;
   company_name?: string;
 } & Pick<RaRecord, "id">;
 
@@ -135,6 +137,7 @@ export type Deal = {
   index: number;
   plan_start?: string | null;
   plan_years?: number | null;
+  monthly_contribution?: number | null;
   payment_status?: string | null;
   month19_contacted?: boolean;
 } & Pick<RaRecord, "id">;

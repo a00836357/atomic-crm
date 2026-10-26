@@ -83,3 +83,8 @@ create or replace trigger on_auth_user_created
 create or replace trigger on_auth_user_updated
     after update on auth.users
     for each row execute function public.handle_update_user();
+
+-- Plan value (amount) = monthly contribution x 12 x years
+create or replace trigger set_deal_plan_value_trigger
+    before insert or update on public.deals
+    for each row execute function public.set_deal_plan_value();

@@ -26,6 +26,7 @@ import { SignupPage } from "../login/SignupPage";
 import { ConfirmationRequired } from "../login/ConfirmationRequired";
 import { ImportPage } from "../misc/ImportPage";
 import { ChangelogPage } from "../misc/ChangelogPage";
+import { ClientList } from "../clients/ClientList";
 import {
   getAuthProvider as defaultAuthProviderBuilder,
   getDataProvider as defaultDataProviderBuilder,
@@ -261,6 +262,7 @@ const DesktopAdmin = (
         <Route path={SettingsPage.path} element={<SettingsPage />} />
         <Route path={ImportPage.path} element={<ImportPage />} />
         <Route path={ChangelogPage.path} element={<ChangelogPage />} />
+        <Route path={ClientList.path} element={<ClientList />} />
       </CustomRoutes>
       <Resource name="deals" {...deals} />
       <Resource name="contacts" {...contacts} />
@@ -336,6 +338,7 @@ const MobileAdmin = (
             element={<SettingsPageMobile />}
           />
           <Route path={ChangelogPage.path} element={<ChangelogPage />} />
+          <Route path={ClientList.path} element={<ClientList />} />
         </CustomRoutes>
         <Resource
           name="contacts"

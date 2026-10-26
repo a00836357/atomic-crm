@@ -467,3 +467,15 @@ BEGIN
   RETURN NEW;
 END;
 $$;
+
+CREATE OR REPLACE FUNCTION "public"."set_deal_plan_value"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO ''
+    AS $$
+begin
+    if new.monthly_contribution is not null then
+        new.amount := new.monthly_contribution * 12 * coalesce(new.plan_years, 0);
+    end if;
+    return new;
+end;
+$$;

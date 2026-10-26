@@ -201,7 +201,8 @@ export const englishCrmMessages = {
         company_id: "Company",
         contact_ids: "Contacts",
         categories: "Categories",
-        amount: "Budget",
+        amount: "Plan value",
+        monthly_contribution: "Monthly contribution",
         expected_closing_date: "Expected closing date",
         stage: "Stage",
         plan_start: "Plan start",
@@ -431,6 +432,20 @@ export const englishCrmMessages = {
     },
     changelog: {
       title: "Changelog",
+    },
+    clients: {
+      title: "Clients",
+      prospects: "Prospects",
+      empty:
+        "No clients yet. A contact becomes a client when their deal reaches the won stage.",
+      search: "Search client...",
+      count: "%{smart_count} client |||| %{smart_count} clients",
+      total_monthly: "Total monthly contributions",
+      total_value: "Total plan value",
+      no_phone: "No phone",
+      month19_pending: "Month 19 pending",
+      month19_done: "Month 19 done",
+      view_plan: "View plan",
     },
     alerts: {
       title: "Alerts",

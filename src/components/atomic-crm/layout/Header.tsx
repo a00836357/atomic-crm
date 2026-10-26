@@ -21,6 +21,8 @@ const Header = () => {
     currentPath = "/";
   } else if (matchPath("/contacts/*", location.pathname)) {
     currentPath = "/contacts";
+  } else if (matchPath("/clients/*", location.pathname)) {
+    currentPath = "/clients";
   } else if (matchPath("/companies/*", location.pathname)) {
     currentPath = "/companies";
   } else if (matchPath("/deals/*", location.pathname)) {
@@ -32,12 +34,12 @@ const Header = () => {
   return (
     <>
       <nav className="grow">
-        <header className="bg-secondary">
+        <header className="bg-brand-header text-brand-header-foreground">
           <div className="px-4">
             <div className="flex justify-between items-center flex-1">
               <Link
                 to="/"
-                className="flex items-center gap-2 text-secondary-foreground no-underline"
+                className="flex items-center gap-2 text-brand-header-foreground no-underline"
               >
                 <img
                   className="[.light_&]:hidden h-6"
@@ -59,9 +61,19 @@ const Header = () => {
                     isActive={currentPath === "/"}
                   />
                   <NavigationTab
-                    label={translate("resources.contacts.name", {
+                    label={translate("resources.deals.name", {
                       smart_count: 2,
                     })}
+                    to="/deals"
+                    isActive={currentPath === "/deals"}
+                  />
+                  <NavigationTab
+                    label={translate("crm.clients.title")}
+                    to="/clients"
+                    isActive={currentPath === "/clients"}
+                  />
+                  <NavigationTab
+                    label={translate("crm.clients.prospects")}
                     to="/contacts"
                     isActive={currentPath === "/contacts"}
                   />
@@ -71,13 +83,6 @@ const Header = () => {
                     })}
                     to="/companies"
                     isActive={currentPath === "/companies"}
-                  />
-                  <NavigationTab
-                    label={translate("resources.deals.name", {
-                      smart_count: 2,
-                    })}
-                    to="/deals"
-                    isActive={currentPath === "/deals"}
                   />
                 </nav>
               </div>
@@ -118,8 +123,8 @@ const NavigationTab = ({
     to={to}
     className={`px-6 py-3 text-sm font-medium transition-colors border-b-2 ${
       isActive
-        ? "text-secondary-foreground border-secondary-foreground"
-        : "text-secondary-foreground/70 border-transparent hover:text-secondary-foreground/80"
+        ? "text-brand-header-foreground border-brand-gold"
+        : "text-brand-header-foreground/70 border-transparent hover:text-brand-header-foreground"
     }`}
   >
     {label}

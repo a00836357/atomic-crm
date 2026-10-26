@@ -205,7 +205,8 @@ export const frenchCrmMessages = {
         company_id: "Entreprise",
         contact_ids: "Contacts",
         categories: "Catégories",
-        amount: "Budget",
+        amount: "Valeur du plan",
+        monthly_contribution: "Cotisation mensuelle",
         expected_closing_date: "Date de clôture prévue",
         stage: "Étape",
         plan_start: "Début du plan",
@@ -436,6 +437,20 @@ export const frenchCrmMessages = {
     },
     changelog: {
       title: "Notes de version",
+    },
+    clients: {
+      title: "Clients",
+      prospects: "Prospects",
+      empty:
+        "Aucun client pour l'instant. Un contact devient client quand son affaire est gagnée.",
+      search: "Rechercher un client...",
+      count: "%{smart_count} client |||| %{smart_count} clients",
+      total_monthly: "Cotisations mensuelles totales",
+      total_value: "Valeur totale des plans",
+      no_phone: "Pas de téléphone",
+      month19_pending: "Mois 19 à faire",
+      month19_done: "Mois 19 fait",
+      view_plan: "Voir le plan",
     },
     alerts: {
       title: "Alertes",

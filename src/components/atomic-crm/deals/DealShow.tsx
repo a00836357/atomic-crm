@@ -144,6 +144,45 @@ const DealShowContent = () => {
             </div>
           </div>
 
+          <div className="flex flex-wrap gap-8 m-4">
+            {[
+              [
+                "monthly_contribution",
+                record.monthly_contribution != null
+                  ? record.monthly_contribution.toLocaleString("es-MX", {
+                      style: "currency",
+                      currency,
+                      maximumFractionDigits: 0,
+                    })
+                  : null,
+              ],
+              ["plan_years", record.plan_years],
+              [
+                "plan_start",
+                record.plan_start
+                  ? formatISODateString(record.plan_start)
+                  : null,
+              ],
+              [
+                "payment_status",
+                record.payment_status
+                  ? translate(
+                      `resources.deals.payment_statuses.${record.payment_status}`,
+                    )
+                  : null,
+              ],
+            ]
+              .filter(([, value]) => value != null && value !== "")
+              .map(([field, value]) => (
+                <div key={field} className="flex flex-col mr-10">
+                  <span className="text-xs text-muted-foreground tracking-wide">
+                    {translate(`resources.deals.fields.${field}`)}
+                  </span>
+                  <span className="text-sm">{value}</span>
+                </div>
+              ))}
+          </div>
+
           {!!record.contact_ids?.length && (
             <div className="m-4">
               <div className="flex flex-col min-h-12 mr-10">

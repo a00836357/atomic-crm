@@ -6,7 +6,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Home, ListTodo, Plus, Settings, Users } from "lucide-react";
+import {
+  BadgeCheck,
+  Home,
+  ListTodo,
+  Plus,
+  Settings,
+  Users,
+} from "lucide-react";
 import { useTranslate } from "ra-core";
 import { Link, matchPath, useLocation, useMatch } from "react-router";
 import { ContactCreateSheet } from "../contacts/ContactCreateSheet";
@@ -23,6 +30,8 @@ export const MobileNavigation = () => {
     currentPath = "/";
   } else if (matchPath("/contacts/*", location.pathname)) {
     currentPath = "/contacts";
+  } else if (matchPath("/clients/*", location.pathname)) {
+    currentPath = "/clients";
   } else if (matchPath("/companies/*", location.pathname)) {
     currentPath = "/companies";
   } else if (matchPath("/tasks/*", location.pathname)) {
@@ -61,11 +70,15 @@ export const MobileNavigation = () => {
             isActive={currentPath === "/"}
           />
           <NavigationButton
+            href="/clients"
+            Icon={BadgeCheck}
+            label={translate("crm.clients.title")}
+            isActive={currentPath === "/clients"}
+          />
+          <NavigationButton
             href="/contacts"
             Icon={Users}
-            label={translate("resources.contacts.name", {
-              smart_count: 2,
-            })}
+            label={translate("crm.clients.prospects")}
             isActive={currentPath === "/contacts"}
           />
           <CreateButton />
@@ -97,7 +110,7 @@ const NavigationButton = ({
     asChild
     variant="ghost"
     className={cn(
-      "flex-col gap-1 h-auto py-2 px-1 rounded-md w-16",
+      "flex-col gap-1 h-auto py-2 px-1 rounded-md w-14",
       isActive ? null : "text-muted-foreground",
     )}
   >

@@ -63,7 +63,7 @@ export const AlertsCard = () => {
           {translate("crm.alerts.title")}
         </h2>
         {alerts.length ? (
-          <span className="ml-2 rounded-full bg-primary px-2 text-sm font-semibold text-primary-foreground">
+          <span className="ml-2 rounded-full bg-brand-gold px-2 text-sm font-semibold text-brand-gold-foreground">
             {alerts.length}
           </span>
         ) : null}

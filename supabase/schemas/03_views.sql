@@ -126,7 +126,11 @@ select
     (jsonb_path_query_array(co.email_jsonb, '$[*]."email"'))::text as email_fts,
     (jsonb_path_query_array(co.phone_jsonb, '$[*]."number"'))::text as phone_fts,
     c.name as company_name,
-    count(distinct t.id) filter (where t.done_date is null) as nb_tasks
+    count(distinct t.id) filter (where t.done_date is null) as nb_tasks,
+    exists (
+        select 1 from public.deals d
+        where d.stage = 'won' and d.archived_at is null and co.id = any(d.contact_ids)
+    ) as is_client
 from public.contacts co
     left join public.tasks t on co.id = t.contact_id
     left join public.companies c on co.company_id = c.id

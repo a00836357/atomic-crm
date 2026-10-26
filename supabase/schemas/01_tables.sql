@@ -85,7 +85,8 @@ create table public.deals (
     plan_start date,
     plan_years smallint,
     payment_status text,
-    month19_contacted boolean not null default false
+    month19_contacted boolean not null default false,
+    monthly_contribution bigint
 );
 
 create table public.deal_notes (

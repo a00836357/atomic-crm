@@ -101,6 +101,7 @@ export const generateContacts = (db: Db, size = 500): Required<Contact>[] => {
       wedding_anniversary: null,
       lead_source: null,
       referred_by: null,
+      is_client: false,
     };
   });
 };

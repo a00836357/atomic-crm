@@ -35,6 +35,8 @@ import { InfinitePagination } from "../misc/InfinitePagination";
 import MobileHeader from "../layout/MobileHeader";
 import { MobileContent } from "../layout/MobileContent";
 
+const prospectsOnly = { "is_client@neq": true };
+
 export const ContactList = () => {
   const { identity } = useGetIdentity();
 
@@ -46,6 +48,8 @@ export const ContactList = () => {
       actions={<ContactListActions />}
       perPage={25}
       sort={{ field: "last_seen", order: "DESC" }}
+      // clients have their own page
+      filter={prospectsOnly}
       exporter={exporter}
     >
       <ContactListLayoutDesktop />
@@ -103,6 +107,8 @@ export const ContactListMobile = () => {
     <InfiniteListBase
       perPage={25}
       sort={{ field: "last_seen", order: "DESC" }}
+      // clients have their own page
+      filter={prospectsOnly}
       exporter={exporter}
       queryOptions={{
         onError: () => {

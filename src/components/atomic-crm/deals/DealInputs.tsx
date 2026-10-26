@@ -79,9 +79,11 @@ const DealMiscInputs = () => {
         defaultValue={dealCategories[0] ? [dealCategories[0].value] : []}
         helperText={false}
       />
+      {/* amount (the plan value) is computed from it by the database */}
       <NumberInput
-        source="amount"
+        source="monthly_contribution"
         defaultValue={0}
+        min={0}
         helperText={false}
         validate={required()}
       />

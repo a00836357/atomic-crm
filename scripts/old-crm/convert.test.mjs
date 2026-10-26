@@ -47,7 +47,7 @@ describe("convertBackup", () => {
       deals: [
         {
           stage: "appointment",
-          amount: 2500,
+          monthly_contribution: 2500,
           plan_years: 15,
           categories: ["optimaxx-plus"],
           expected_closing_date: "2026-11-02",
@@ -113,7 +113,7 @@ describe("convertBackup", () => {
           stage: "won",
           plan_start: "2025-03-10",
           plan_years: 20,
-          amount: 3000,
+          monthly_contribution: 3000,
           payment_status: "late",
           month19_contacted: true,
         },
