@@ -28,7 +28,7 @@ declare
         'deals', $q$
             select 'deals', d.id, d.name,
                 (select dc.name from public.companies dc where dc.id = d.company_id), null::bigint, d.id, d.created_at,
-                concat_ws(' · ', d.category, d.description)
+                concat_ws(' · ', array_to_string(d.categories, ', '), d.description)
             from public.deals d
             where d.archived_at is null and d.fts @@ %1$L::tsquery
             order by d.created_at desc

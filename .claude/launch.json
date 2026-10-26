@@ -18,6 +18,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["--prefix", "doc", "run", "dev", "--", "--port", "4321"],
       "port": 4321
+    },
+    {
+      "name": "prod-local",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["vite", "--mode", "production", "--port", "5175"],
+      "port": 5175
     }
   ]
 }
