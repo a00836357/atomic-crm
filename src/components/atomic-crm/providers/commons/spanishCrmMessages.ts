@@ -436,6 +436,25 @@ export const spanishCrmMessages = {
     changelog: {
       title: "Novedades",
     },
+    alerts: {
+      title: "Alertas",
+      empty: "No hay nada en los próximos 30 días.",
+      no_contact: "Sin contacto",
+      today: "Hoy",
+      in_days: "En %{smart_count} día |||| En %{smart_count} días",
+      days_ago: "Hace %{smart_count} día |||| Hace %{smart_count} días",
+      whatsapp: "WhatsApp",
+      copy_message: "Copiar mensaje",
+      mark_done: "Marcar como hecho",
+      marked_done: "Seguimiento del mes 19 marcado como hecho",
+      types: {
+        birthday: "Cumpleaños",
+        wedding: "Aniversario de boda",
+        ppr: "Aniversario del plan",
+        month19: "Mes 19: nuevas opciones",
+        quarterly: "Revisión trimestral",
+      },
+    },
     activity: {
       added_company: "%{name} agregó la empresa",
       you_added_company: "Agregaste la empresa",

@@ -432,6 +432,25 @@ export const englishCrmMessages = {
     changelog: {
       title: "Changelog",
     },
+    alerts: {
+      title: "Alerts",
+      empty: "Nothing coming up in the next 30 days.",
+      no_contact: "No contact",
+      today: "Today",
+      in_days: "In %{smart_count} day |||| In %{smart_count} days",
+      days_ago: "%{smart_count} day ago |||| %{smart_count} days ago",
+      whatsapp: "WhatsApp",
+      copy_message: "Copy message",
+      mark_done: "Mark as done",
+      marked_done: "Month 19 follow-up marked as done",
+      types: {
+        birthday: "Birthday",
+        wedding: "Wedding anniversary",
+        ppr: "Plan anniversary",
+        month19: "Month 19: new options",
+        quarterly: "Quarterly review",
+      },
+    },
     activity: {
       added_company: "%{name} added company",
       you_added_company: "You added company",

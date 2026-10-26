@@ -1,5 +1,6 @@
 import { useGetList } from "ra-core";
 
+import { AlertsCard } from "../alerts/AlertsCard";
 import type { Contact, ContactNote } from "../types";
 import { DashboardActivityLog } from "./DashboardActivityLog";
 import { DashboardStepper } from "./DashboardStepper";
@@ -53,6 +54,7 @@ export const Dashboard = () => {
       </div>
       <div className="md:col-span-6">
         <div className="flex flex-col gap-6">
+          <AlertsCard />
           {totalDeal ? <DealsChart /> : null}
           <DashboardActivityLog />
         </div>

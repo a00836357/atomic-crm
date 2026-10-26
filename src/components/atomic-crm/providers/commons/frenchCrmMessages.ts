@@ -437,6 +437,25 @@ export const frenchCrmMessages = {
     changelog: {
       title: "Notes de version",
     },
+    alerts: {
+      title: "Alertes",
+      empty: "Rien de prévu dans les 30 prochains jours.",
+      no_contact: "Aucun contact",
+      today: "Aujourd'hui",
+      in_days: "Dans %{smart_count} jour |||| Dans %{smart_count} jours",
+      days_ago: "Il y a %{smart_count} jour |||| Il y a %{smart_count} jours",
+      whatsapp: "WhatsApp",
+      copy_message: "Copier le message",
+      mark_done: "Marquer comme fait",
+      marked_done: "Suivi du mois 19 marqué comme fait",
+      types: {
+        birthday: "Anniversaire",
+        wedding: "Anniversaire de mariage",
+        ppr: "Anniversaire du plan",
+        month19: "Mois 19 : nouvelles options",
+        quarterly: "Revue trimestrielle",
+      },
+    },
     activity: {
       added_company: "%{name} a ajouté l'entreprise",
       you_added_company: "Vous avez ajouté l'entreprise",
