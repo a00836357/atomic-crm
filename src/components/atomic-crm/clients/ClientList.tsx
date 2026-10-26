@@ -1,4 +1,9 @@
-import { differenceInCalendarDays, startOfDay } from "date-fns";
+import {
+  addMonths,
+  differenceInCalendarDays,
+  parseISO,
+  startOfDay,
+} from "date-fns";
 import { MessageCircle, Search } from "lucide-react";
 import { useGetList, useGetMany, useTranslate } from "ra-core";
 import { useMemo, useState } from "react";
@@ -253,6 +258,11 @@ const PlanDetails = ({ plan, today }: { plan: Deal; today: Date }) => {
   const anniversary = plan.plan_start
     ? nextAnniversary(plan.plan_start, today)
     : null;
+  // same notice period as the month 19 alert
+  const month19Due =
+    !!plan.plan_start &&
+    differenceInCalendarDays(addMonths(parseISO(plan.plan_start), 19), today) <=
+      7;
 
   return (
     <div className="flex flex-col gap-2 rounded-md bg-secondary/60 p-3">
@@ -285,13 +295,18 @@ const PlanDetails = ({ plan, today }: { plan: Deal; today: Date }) => {
             )}
           </Badge>
         ) : null}
-        <Badge variant="outline">
-          {translate(
-            plan.month19_contacted
-              ? "crm.clients.month19_done"
-              : "crm.clients.month19_pending",
-          )}
-        </Badge>
+        {plan.month19_contacted ? (
+          <Badge variant="outline">
+            {translate("crm.clients.month19_done")}
+          </Badge>
+        ) : month19Due ? (
+          <Badge
+            variant="outline"
+            className="border-transparent bg-brand-gold/25 text-brand-gold-foreground dark:text-brand-gold"
+          >
+            {translate("crm.clients.month19_pending")}
+          </Badge>
+        ) : null}
         {anniversary &&
         anniversary.getFullYear() > Number(plan.plan_start?.slice(0, 4)) ? (
           <DatePill

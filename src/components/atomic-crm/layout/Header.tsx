@@ -121,7 +121,7 @@ const NavigationTab = ({
 }) => (
   <Link
     to={to}
-    className={`px-6 py-3 text-sm font-medium transition-colors border-b-2 ${
+    className={`px-6 py-3 text-sm font-medium transition-colors border-b-[3px] ${
       isActive
         ? "text-brand-header-foreground border-brand-gold"
         : "text-brand-header-foreground/70 border-transparent hover:text-brand-header-foreground"
