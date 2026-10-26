@@ -84,6 +84,13 @@ export default defineConfig({
         },
       },
       {
+        test: {
+          name: "scripts",
+          environment: "node",
+          include: ["scripts/**/*.test.mjs"],
+        },
+      },
+      {
         // Map the Deno imports to the installed npm packages so Vitest can run
         // these Deno-targeted tests in Node without a Deno runtime. These aliases
         // only apply to this project.
