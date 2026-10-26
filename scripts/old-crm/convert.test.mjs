@@ -4,6 +4,8 @@ import {
   BANK_TAG,
   IMPORT_TAG,
   convertBackup,
+  fixCapitals,
+  isoDate,
   splitName,
   summarize,
 } from "./convert.mjs";
@@ -208,6 +210,45 @@ describe("convertBackup", () => {
       tasks: 0,
       skipped: 0,
     });
+  });
+});
+
+describe("bank spreadsheet cells", () => {
+  it("reads Excel serial days and fixes all-caps names", () => {
+    const { contacts } = convertBackup(
+      {
+        insurecrm_bank_v1: [
+          {
+            name: "PEDRO GRACÍA DE LEÓN",
+            date: "45674",
+            ultimo_contacto: "45953",
+          },
+        ],
+      },
+      today,
+    );
+    expect(contacts[0]).toMatchObject({
+      first_name: "Pedro",
+      last_name: "Gracía de León",
+      first_seen: "2025-01-17T12:00:00.000Z",
+      last_seen: "2025-10-23T12:00:00.000Z",
+    });
+  });
+});
+
+describe("isoDate", () => {
+  it("accepts ISO dates and Excel serials only", () => {
+    expect(isoDate("2026-11-02T10:00:00Z")).toBe("2026-11-02");
+    expect(isoDate("45674")).toBe("2025-01-17");
+    expect(isoDate("17/01/2025")).toBeNull();
+    expect(isoDate("")).toBeNull();
+  });
+});
+
+describe("fixCapitals", () => {
+  it("only changes names written in capitals", () => {
+    expect(fixCapitals("JUAN CARLOS DEL RÍO")).toBe("Juan Carlos del Río");
+    expect(fixCapitals("Miriam Del Rocío")).toBe("Miriam Del Rocío");
   });
 });
 

@@ -85,10 +85,37 @@ export const splitName = (fullName) => {
   };
 };
 
-const isoDate = (value) =>
-  typeof value === "string" && /^\d{4}-\d{2}-\d{2}/.test(value)
-    ? value.slice(0, 10)
-    : null;
+// Days between Excel's day 0 and the Unix epoch (Excel counts 1900 as a leap year)
+const EXCEL_EPOCH_OFFSET = 25569;
+
+/** yyyy-MM-dd from an ISO string or an Excel serial day ("45674"), else null */
+export const isoDate = (value) => {
+  const s = (value ?? "").toString().trim();
+  if (/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0, 10);
+  // the prospect bank kept the raw cells of the spreadsheet it was imported from
+  if (/^\d{5}$/.test(s)) {
+    const ms = (Number(s) - EXCEL_EPOCH_OFFSET) * 86400000;
+    return new Date(ms).toISOString().slice(0, 10);
+  }
+  return null;
+};
+
+const LOWERCASE_WORDS = new Set(["de", "del", "la", "las", "los", "y"]);
+
+/** "PEDRO GRACÍA DE LEÓN" -> "Pedro Gracía de León"; mixed case is kept */
+export const fixCapitals = (name) => {
+  const s = (name ?? "").toString().trim().replace(/\s+/g, " ");
+  if (s !== s.toUpperCase()) return s;
+  return s
+    .toLowerCase()
+    .split(" ")
+    .map((word, i) =>
+      i > 0 && LOWERCASE_WORDS.has(word)
+        ? word
+        : word.charAt(0).toUpperCase() + word.slice(1),
+    )
+    .join(" ");
+};
 
 const text = (value) => {
   const s = (value ?? "").toString().trim();
@@ -120,7 +147,7 @@ export const convertBackup = (backup, today) => {
     if (!contact) {
       const seen = createdAt ?? `${today}T12:00:00.000Z`;
       contact = {
-        ...splitName(name),
+        ...splitName(fixCapitals(name)),
         phone_jsonb: digits(phone)
           ? [{ number: phone.trim(), type: "Work" }]
           : [],
