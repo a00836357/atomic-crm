@@ -102,7 +102,7 @@ export const isoDate = (value) => {
 
 const LOWERCASE_WORDS = new Set(["de", "del", "la", "las", "los", "y"]);
 
-/** "PEDRO GRACÍA DE LEÓN" -> "Pedro Gracía de León"; mixed case is kept */
+/** "MARTA LUZ DE LA PEÑA" -> "Marta Luz de la Peña"; mixed case is kept */
 export const fixCapitals = (name) => {
   const s = (name ?? "").toString().trim().replace(/\s+/g, " ");
   if (s !== s.toUpperCase()) return s;

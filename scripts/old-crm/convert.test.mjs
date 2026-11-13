@@ -219,7 +219,7 @@ describe("bank spreadsheet cells", () => {
       {
         insurecrm_bank_v1: [
           {
-            name: "PEDRO GRACÍA DE LEÓN",
+            name: "MARTA LUZ DE LA PEÑA",
             date: "45674",
             ultimo_contacto: "45953",
           },
@@ -228,8 +228,8 @@ describe("bank spreadsheet cells", () => {
       today,
     );
     expect(contacts[0]).toMatchObject({
-      first_name: "Pedro",
-      last_name: "Gracía de León",
+      first_name: "Marta",
+      last_name: "Luz de la Peña",
       first_seen: "2025-01-17T12:00:00.000Z",
       last_seen: "2025-10-23T12:00:00.000Z",
     });
@@ -248,7 +248,7 @@ describe("isoDate", () => {
 describe("fixCapitals", () => {
   it("only changes names written in capitals", () => {
     expect(fixCapitals("JUAN CARLOS DEL RÍO")).toBe("Juan Carlos del Río");
-    expect(fixCapitals("Miriam Del Rocío")).toBe("Miriam Del Rocío");
+    expect(fixCapitals("Ana Del Valle")).toBe("Ana Del Valle");
   });
 });
 
