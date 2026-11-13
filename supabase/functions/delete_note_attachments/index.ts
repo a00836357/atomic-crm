@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
-import { AuthMiddleware } from "../_shared/authentication.ts";
+import { AuthMiddleware, UserMiddleware } from "../_shared/authentication.ts";
+import { getUserSale } from "../_shared/getUserSale.ts";
 import { supabaseAdmin } from "../_shared/supabaseAdmin.ts";
 
 const ATTACHMENTS_BUCKET =
@@ -54,8 +55,18 @@ const deleteNoteAttachments = async (req: Request) => {
   });
 };
 
+// Called by the note triggers with the session of the user who edited the
+// note. It deletes with the service role, so only administrators may call it.
 Deno.serve(async (req: Request) =>
-  AuthMiddleware(req, async (req: Request) => deleteNoteAttachments(req)),
+  AuthMiddleware(req, async (req: Request) =>
+    UserMiddleware(req, async (req, user) => {
+      const sale = user ? await getUserSale(user) : null;
+      if (!sale?.administrator || sale.disabled) {
+        return jsonResponse({ error: "Forbidden" }, 403);
+      }
+      return deleteNoteAttachments(req);
+    }),
+  ),
 );
 
 const getPathsToDelete = (payload: WebhookPayload): string[] => {

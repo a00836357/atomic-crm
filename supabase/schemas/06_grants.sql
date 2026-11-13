@@ -6,6 +6,8 @@
 -- Schema usage
 grant usage on schema public to postgres;
 grant usage on schema public to anon;
+-- anon only reads init_state (has the CRM been set up?) before signing in
+grant select on table public.init_state to anon;
 grant usage on schema public to authenticated;
 grant usage on schema public to service_role;
 
@@ -66,97 +68,74 @@ grant all on function public.set_sales_id_default() to authenticated;
 grant all on function public.set_sales_id_default() to service_role;
 
 -- Table grants
-grant all on table public.companies to anon;
 grant all on table public.companies to authenticated;
 grant all on table public.companies to service_role;
 
-grant all on table public.contacts to anon;
 grant all on table public.contacts to authenticated;
 grant all on table public.contacts to service_role;
 
-grant all on table public.contact_notes to anon;
 grant all on table public.contact_notes to authenticated;
 grant all on table public.contact_notes to service_role;
 
-grant all on table public.deals to anon;
 grant all on table public.deals to authenticated;
 grant all on table public.deals to service_role;
 
-grant all on table public.deal_notes to anon;
 grant all on table public.deal_notes to authenticated;
 grant all on table public.deal_notes to service_role;
 
-grant all on table public.sales to anon;
 grant all on table public.sales to authenticated;
 grant all on table public.sales to service_role;
 
-grant all on table public.tags to anon;
 grant all on table public.tags to authenticated;
 grant all on table public.tags to service_role;
 
-grant all on table public.tasks to anon;
 grant all on table public.tasks to authenticated;
 grant all on table public.tasks to service_role;
 
-grant all on table public.configuration to anon;
 grant all on table public.configuration to authenticated;
 grant all on table public.configuration to service_role;
 
-grant all on table public.favicons_excluded_domains to anon;
 grant all on table public.favicons_excluded_domains to authenticated;
 grant all on table public.favicons_excluded_domains to service_role;
 
 -- View grants
-grant all on table public.activity_log to anon;
 grant all on table public.activity_log to authenticated;
 grant all on table public.activity_log to service_role;
 
-grant all on table public.companies_summary to anon;
 grant all on table public.companies_summary to authenticated;
 grant all on table public.companies_summary to service_role;
 
-grant all on table public.contacts_summary to anon;
 grant all on table public.contacts_summary to authenticated;
 grant all on table public.contacts_summary to service_role;
 
-grant all on table public.init_state to anon;
 grant all on table public.init_state to authenticated;
 grant all on table public.init_state to service_role;
 
 -- Sequence grants
-grant all on sequence public.companies_id_seq to anon;
 grant all on sequence public.companies_id_seq to authenticated;
 grant all on sequence public.companies_id_seq to service_role;
 
-grant all on sequence public."contactNotes_id_seq" to anon;
 grant all on sequence public."contactNotes_id_seq" to authenticated;
 grant all on sequence public."contactNotes_id_seq" to service_role;
 
-grant all on sequence public.contacts_id_seq to anon;
 grant all on sequence public.contacts_id_seq to authenticated;
 grant all on sequence public.contacts_id_seq to service_role;
 
-grant all on sequence public."dealNotes_id_seq" to anon;
 grant all on sequence public."dealNotes_id_seq" to authenticated;
 grant all on sequence public."dealNotes_id_seq" to service_role;
 
-grant all on sequence public.deals_id_seq to anon;
 grant all on sequence public.deals_id_seq to authenticated;
 grant all on sequence public.deals_id_seq to service_role;
 
-grant all on sequence public.favicons_excluded_domains_id_seq to anon;
 grant all on sequence public.favicons_excluded_domains_id_seq to authenticated;
 grant all on sequence public.favicons_excluded_domains_id_seq to service_role;
 
-grant all on sequence public.sales_id_seq to anon;
 grant all on sequence public.sales_id_seq to authenticated;
 grant all on sequence public.sales_id_seq to service_role;
 
-grant all on sequence public.tags_id_seq to anon;
 grant all on sequence public.tags_id_seq to authenticated;
 grant all on sequence public.tags_id_seq to service_role;
 
-grant all on sequence public.tasks_id_seq to anon;
 grant all on sequence public.tasks_id_seq to authenticated;
 grant all on sequence public.tasks_id_seq to service_role;
 

@@ -3,6 +3,8 @@
 -- This file declares storage bucket policies.
 --
 
-create policy "Attachments 1mt4rzk_0" on storage.objects for select to authenticated using (bucket_id = 'attachments');
-create policy "Attachments 1mt4rzk_1" on storage.objects for insert to authenticated with check (bucket_id = 'attachments');
-create policy "Attachments 1mt4rzk_3" on storage.objects for delete to authenticated using (bucket_id = 'attachments');
+-- The attachments bucket is private (served through signed URLs) and only
+-- administrators can use it.
+create policy "Attachments admins only" on storage.objects for all to authenticated
+    using (bucket_id = 'attachments' and public.is_admin())
+    with check (bucket_id = 'attachments' and public.is_admin());

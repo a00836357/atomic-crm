@@ -313,6 +313,7 @@ const lifeCycleCallbacks: ResourceCallbacks[] = [
   },
   {
     resource: "contact_notes",
+    afterRead: signNoteAttachments,
     beforeSave: async (data: ContactNote, _, __) => {
       if (data.attachments) {
         data.attachments = await Promise.all(
@@ -324,6 +325,7 @@ const lifeCycleCallbacks: ResourceCallbacks[] = [
   },
   {
     resource: "deal_notes",
+    afterRead: signNoteAttachments,
     beforeSave: async (data: DealNote, _, __) => {
       if (data.attachments) {
         data.attachments = await Promise.all(
@@ -335,6 +337,10 @@ const lifeCycleCallbacks: ResourceCallbacks[] = [
   },
   {
     resource: "sales",
+    afterRead: async (sale: Sale) => ({
+      ...sale,
+      avatar: await signStoredFile(sale.avatar),
+    }),
     beforeGetList: async (params) => {
       return applyFullTextSearch(["first_name", "last_name"])(params);
     },
@@ -449,6 +455,29 @@ const applyFullTextSearch = (columns: string[]) => (params: GetListParams) => {
   };
 };
 
+const SIGNED_URL_TTL_SECONDS = 60 * 60;
+
+/** Replaces the src of a file stored in the private bucket by a fresh signed URL */
+async function signStoredFile<T extends Partial<RAFile> | null | undefined>(
+  fi: T,
+): Promise<T> {
+  if (!fi?.path) return fi;
+  const { data } = await getSupabaseClient()
+    .storage.from(ATTACHMENTS_BUCKET)
+    .createSignedUrl(fi.path, SIGNED_URL_TTL_SECONDS);
+  return data ? { ...fi, src: data.signedUrl } : fi;
+}
+
+async function signNoteAttachments<
+  T extends { attachments?: Partial<RAFile>[] | null },
+>(note: T): Promise<T> {
+  if (!note.attachments?.length) return note;
+  return {
+    ...note,
+    attachments: await Promise.all(note.attachments.map(signStoredFile)),
+  };
+}
+
 const uploadToBucket = async (fi: RAFile) => {
   if (!fi.src.startsWith("blob:") && !fi.src.startsWith("data:")) {
     // Sign URL check if path exists in the bucket
@@ -496,12 +525,17 @@ const uploadToBucket = async (fi: RAFile) => {
     throw new Error("Failed to upload attachment");
   }
 
-  const { data } = getSupabaseClient()
+  // The bucket is private: src is a short-lived signed URL, re-signed from
+  // path every time the record is read (see signStoredFile)
+  const { data, error: signError } = await getSupabaseClient()
     .storage.from(ATTACHMENTS_BUCKET)
-    .getPublicUrl(filePath);
+    .createSignedUrl(filePath, SIGNED_URL_TTL_SECONDS);
+  if (signError || !data) {
+    throw new Error("Failed to sign attachment URL");
+  }
 
   fi.path = filePath;
-  fi.src = data.publicUrl;
+  fi.src = data.signedUrl;
 
   // save MIME type
   const mimeType = file.type;
