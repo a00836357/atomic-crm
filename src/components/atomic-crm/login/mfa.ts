@@ -5,7 +5,7 @@ import type { AuthenticatorAssuranceLevels } from "@supabase/supabase-js";
  * before using the CRM, even if no factor is enrolled yet (the user is then
  * sent to enroll one). Turned on once the database policies require aal2.
  */
-export const MFA_REQUIRED = false;
+export const MFA_REQUIRED = true;
 
 export const MFA_PATH = "/mfa";
 

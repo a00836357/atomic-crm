@@ -452,6 +452,7 @@ export const englishCrmMessages = {
       blank_message: "Blank message",
     },
     mfa: {
+      last_factor_hint: "To remove this device, add another one first.",
       section_title: "Two-step verification",
       status_on:
         "On for %{smart_count} device |||| On for %{smart_count} devices",

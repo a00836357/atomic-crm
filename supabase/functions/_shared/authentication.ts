@@ -30,7 +30,8 @@ function verifySupabaseJWT(jwt: string) {
 }
 
 /**
- * Validates the Authorization header to ensure that a user is authenticated.
+ * Validates the Authorization header to ensure that a user is authenticated
+ * with two-step verification (aal2), as the database policies require.
  */
 export const AuthMiddleware = async (
   req: Request,
@@ -40,15 +41,23 @@ export const AuthMiddleware = async (
 
   try {
     const token = getAuthToken(req);
-    const isValidJWT = await verifySupabaseJWT(token);
+    const { payload } = await verifySupabaseJWT(token);
 
-    if (isValidJWT) return await next(req);
-
-    return createErrorResponse(401, "Invalid authentication");
+    if (payload.aal !== "aal2") {
+      return createErrorResponse(401, "Two-step verification required");
+    }
+    return await next(req);
   } catch (e) {
     return createErrorResponse(401, e?.toString() || "Unauthorized");
   }
 };
+
+/**
+ * Claims of the request's JWT. Only call it behind AuthMiddleware, which
+ * verified the signature.
+ */
+export const getVerifiedClaims = (req: Request) =>
+  jose.decodeJwt(getAuthToken(req));
 
 /**
  * Get the authenticated user using the authorization header.

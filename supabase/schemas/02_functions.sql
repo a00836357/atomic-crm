@@ -281,9 +281,11 @@ CREATE OR REPLACE FUNCTION "public"."is_admin"() RETURNS boolean
     SET "search_path" TO ''
     AS $$
 begin
-  return exists (
-    select 1 from public.sales where user_id = auth.uid() and administrator = true
-  );
+  -- aal2: the session used the authenticator code, not just the password
+  return coalesce(auth.jwt() ->> 'aal', '') = 'aal2'
+    and exists (
+      select 1 from public.sales where user_id = auth.uid() and administrator = true
+    );
 end;
 $$;
 

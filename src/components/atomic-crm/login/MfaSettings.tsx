@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
 
 import { getSupabaseClient } from "../providers/supabase/supabase";
-import { MFA_PATH } from "./mfa";
+import { MFA_PATH, MFA_REQUIRED } from "./mfa";
 
 /** Two-step verification status, with links to enroll and remove devices */
 export const MfaSettings = () => {
@@ -55,12 +55,19 @@ export const MfaSettings = () => {
             type="button"
             variant="ghost"
             size="sm"
+            // the CRM requires two-step verification: keep at least one device
+            disabled={MFA_REQUIRED && factors.length === 1}
             onClick={() => remove(factor.id)}
           >
             {translate("crm.mfa.remove")}
           </Button>
         </div>
       ))}
+      {MFA_REQUIRED && factors.length === 1 ? (
+        <p className="text-xs text-muted-foreground">
+          {translate("crm.mfa.last_factor_hint")}
+        </p>
+      ) : null}
       <Button asChild variant="outline" size="sm">
         <Link to={factors.length ? `${MFA_PATH}?add=1` : MFA_PATH}>
           {translate(factors.length ? "crm.mfa.add_device" : "crm.mfa.setup")}

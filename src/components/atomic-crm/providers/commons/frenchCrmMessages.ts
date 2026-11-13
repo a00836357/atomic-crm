@@ -457,6 +457,8 @@ export const frenchCrmMessages = {
       blank_message: "Message vide",
     },
     mfa: {
+      last_factor_hint:
+        "Pour retirer cet appareil, ajoutez-en d'abord un autre.",
       section_title: "Validation en deux étapes",
       status_on:
         "Activée sur %{smart_count} appareil |||| Activée sur %{smart_count} appareils",

@@ -3,7 +3,11 @@ import { sql, type Selectable } from "https://esm.sh/kysely@0.27.2";
 import { db, type ContactsTable, CompiledQuery } from "../_shared/db.ts";
 import { corsHeaders, OptionsMiddleware } from "../_shared/cors.ts";
 import { createErrorResponse } from "../_shared/utils.ts";
-import { AuthMiddleware, UserMiddleware } from "../_shared/authentication.ts";
+import {
+  AuthMiddleware,
+  getVerifiedClaims,
+  UserMiddleware,
+} from "../_shared/authentication.ts";
 
 type Contact = Selectable<ContactsTable>;
 
@@ -79,15 +83,17 @@ function mergeContactData(winner: Contact, loser: Contact) {
 async function mergeContacts(
   loserId: number,
   winnerId: number,
-  userId: string,
+  claims: Record<string, unknown>,
 ) {
   try {
     return await db.transaction().execute(async (trx) => {
       // Enable RLS by switching to authenticated role and setting user context
       await trx.executeQuery(CompiledQuery.raw("SET LOCAL ROLE authenticated"));
+      // Pass the verified session (sub and aal) so is_admin() sees an aal2 admin
       await trx.executeQuery(
         CompiledQuery.raw(
-          `SELECT set_config('request.jwt.claim.sub', '${userId}', true)`,
+          "SELECT set_config('request.jwt.claims', $1, true), set_config('request.jwt.claim.sub', $2, true)",
+          [JSON.stringify(claims), String(claims.sub)],
         ),
       );
 
@@ -161,7 +167,7 @@ async function mergeContacts(
 Deno.serve(async (req: Request) =>
   OptionsMiddleware(req, async (req) =>
     AuthMiddleware(req, async (req) =>
-      UserMiddleware(req, async (req, user) => {
+      UserMiddleware(req, async (req, _user) => {
         // Handle POST request
         if (req.method === "POST") {
           try {
@@ -171,7 +177,11 @@ Deno.serve(async (req: Request) =>
               return createErrorResponse(400, "Missing loserId or winnerId");
             }
 
-            const result = await mergeContacts(loserId, winnerId, user.id);
+            const result = await mergeContacts(
+              loserId,
+              winnerId,
+              getVerifiedClaims(req),
+            );
 
             return new Response(JSON.stringify(result), {
               headers: { "Content-Type": "application/json", ...corsHeaders },

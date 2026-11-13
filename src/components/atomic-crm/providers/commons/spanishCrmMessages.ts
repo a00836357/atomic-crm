@@ -456,6 +456,7 @@ export const spanishCrmMessages = {
       blank_message: "Mensaje en blanco",
     },
     mfa: {
+      last_factor_hint: "Para quitar este dispositivo, primero agrega otro.",
       section_title: "Verificación en dos pasos",
       status_on:
         "Activa en %{smart_count} dispositivo |||| Activa en %{smart_count} dispositivos",
