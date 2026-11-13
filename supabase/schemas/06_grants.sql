@@ -12,8 +12,6 @@ grant usage on schema public to authenticated;
 grant usage on schema public to service_role;
 
 -- Function grants
-grant all on function public.cleanup_note_attachments() to anon;
-grant all on function public.cleanup_note_attachments() to authenticated;
 grant all on function public.cleanup_note_attachments() to service_role;
 
 grant all on function public.get_avatar_for_email(text) to anon;
@@ -35,23 +33,16 @@ grant all on function public.handle_company_saved() to anon;
 grant all on function public.handle_company_saved() to authenticated;
 grant all on function public.handle_company_saved() to service_role;
 
-grant all on function public.handle_contact_note_created_or_updated() to anon;
-grant all on function public.handle_contact_note_created_or_updated() to authenticated;
 grant all on function public.handle_contact_note_created_or_updated() to service_role;
 
 grant all on function public.handle_contact_saved() to anon;
 grant all on function public.handle_contact_saved() to authenticated;
 grant all on function public.handle_contact_saved() to service_role;
 
-grant all on function public.handle_new_user() to anon;
-grant all on function public.handle_new_user() to authenticated;
 grant all on function public.handle_new_user() to service_role;
 
-grant all on function public.handle_update_user() to anon;
-grant all on function public.handle_update_user() to authenticated;
 grant all on function public.handle_update_user() to service_role;
 
-grant all on function public.is_admin() to anon;
 grant all on function public.is_admin() to authenticated;
 grant all on function public.is_admin() to service_role;
 
@@ -146,3 +137,11 @@ grant all on table public.message_templates to authenticated;
 grant all on table public.message_templates to service_role;
 grant all on sequence public.message_templates_id_seq to authenticated;
 grant all on sequence public.message_templates_id_seq to service_role;
+
+-- Trigger functions run without EXECUTE checks; nobody else may call them.
+revoke execute on function public.cleanup_note_attachments() from public;
+revoke execute on function public.handle_contact_note_created_or_updated() from public;
+revoke execute on function public.handle_new_user() from public;
+revoke execute on function public.handle_update_user() from public;
+-- is_admin() is called by every RLS policy for signed-in users only.
+revoke execute on function public.is_admin() from public;
