@@ -36,6 +36,7 @@ import {
 } from "ra-core";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 
+import { MfaSettings } from "../login/MfaSettings";
 import { MobileContent } from "../layout/MobileContent";
 import MobileHeader from "../layout/MobileHeader";
 import { ChangelogPage } from "../misc/ChangelogPage";
@@ -105,6 +106,7 @@ export const SettingsPageMobile = () => {
           <div className="space-y-6">
             <ProfileSection />
             <PreferencesSection />
+            <MfaSection />
             <AboutSection />
           </div>
 
@@ -126,6 +128,18 @@ export const SettingsPageMobile = () => {
 };
 
 SettingsPageMobile.path = "/settings";
+
+const MfaSection = () => {
+  const translate = useTranslate();
+  return (
+    <div>
+      <SectionLabel>{translate("crm.mfa.section_title")}</SectionLabel>
+      <div className="rounded-lg border p-3">
+        <MfaSettings />
+      </div>
+    </div>
+  );
+};
 
 const SectionLabel = ({ children }: { children: React.ReactNode }) => (
   <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide px-1 mb-1.5">

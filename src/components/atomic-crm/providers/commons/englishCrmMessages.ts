@@ -451,6 +451,34 @@ export const englishCrmMessages = {
       no_phone_hint: "No phone: WhatsApp will ask you to pick the chat.",
       blank_message: "Blank message",
     },
+    mfa: {
+      section_title: "Two-step verification",
+      status_on:
+        "On for %{smart_count} device |||| On for %{smart_count} devices",
+      status_off: "Off. Signing in only asks for your password.",
+      setup: "Set up two-step verification",
+      add_device: "Add another device",
+      remove: "Remove",
+      removed: "Device removed",
+      remove_error:
+        "Could not remove it. Sign out, sign back in with your code and try again.",
+      title_enroll: "Set up two-step verification",
+      title_verify: "Two-step verification",
+      enroll_step1:
+        "1. Open your authenticator app (Google Authenticator, Microsoft Authenticator, 1Password, Bitwarden…) and scan this QR code.",
+      enroll_manual: "Can't scan it? Type this key in the app:",
+      enroll_step2: "2. Enter the 6-digit code the app shows.",
+      qr_alt: "QR code for the authenticator app",
+      verify_hint: "Enter the 6-digit code from your authenticator app.",
+      code: "Code",
+      activate: "Turn on",
+      verify: "Verify",
+      invalid_code: "Wrong or expired code. Enter the next one the app shows.",
+      error:
+        "Two-step verification could not load. Reload the page or sign out and try again.",
+      already: "Two-step verification is already done for this session.",
+      back: "Back to the CRM",
+    },
     clients: {
       title: "Clients",
       prospects: "Prospects",

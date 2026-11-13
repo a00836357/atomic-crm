@@ -456,6 +456,38 @@ export const frenchCrmMessages = {
       no_phone_hint: "Pas de téléphone : WhatsApp vous demandera le chat.",
       blank_message: "Message vide",
     },
+    mfa: {
+      section_title: "Validation en deux étapes",
+      status_on:
+        "Activée sur %{smart_count} appareil |||| Activée sur %{smart_count} appareils",
+      status_off: "Désactivée. La connexion ne demande que votre mot de passe.",
+      setup: "Configurer la validation en deux étapes",
+      add_device: "Ajouter un autre appareil",
+      remove: "Retirer",
+      removed: "Appareil retiré",
+      remove_error:
+        "Impossible de le retirer. Déconnectez-vous, reconnectez-vous avec votre code et réessayez.",
+      title_enroll: "Configurer la validation en deux étapes",
+      title_verify: "Validation en deux étapes",
+      enroll_step1:
+        "1. Ouvrez votre application d'authentification et scannez ce code QR.",
+      enroll_manual:
+        "Impossible de scanner ? Saisissez cette clé dans l'application :",
+      enroll_step2:
+        "2. Saisissez le code à 6 chiffres affiché par l'application.",
+      qr_alt: "Code QR pour l'application d'authentification",
+      verify_hint:
+        "Saisissez le code à 6 chiffres de votre application d'authentification.",
+      code: "Code",
+      activate: "Activer",
+      verify: "Vérifier",
+      invalid_code: "Code incorrect ou expiré. Saisissez le suivant.",
+      error:
+        "Impossible de charger la validation. Rechargez la page ou déconnectez-vous et réessayez.",
+      already:
+        "La validation en deux étapes est déjà faite pour cette session.",
+      back: "Retour au CRM",
+    },
     clients: {
       title: "Clients",
       prospects: "Prospects",

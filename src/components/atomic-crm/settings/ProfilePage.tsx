@@ -20,6 +20,7 @@ import { SimpleFormIterator } from "@/components/admin/simple-form-iterator";
 import { TextInput } from "@/components/admin/text-input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { MfaSettings } from "../login/MfaSettings";
 import {
   Select,
   SelectContent,
@@ -227,6 +228,16 @@ const ProfileForm = ({
                 {translate("ra.action.save")}
               </Button>
             )}
+          </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent>
+          <div className="space-y-4">
+            <h2 className="text-xl font-semibold text-muted-foreground">
+              {translate("crm.mfa.section_title")}
+            </h2>
+            <MfaSettings />
           </div>
         </CardContent>
       </Card>

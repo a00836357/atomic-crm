@@ -455,6 +455,35 @@ export const spanishCrmMessages = {
       no_phone_hint: "Sin teléfono: WhatsApp te pedirá elegir el chat.",
       blank_message: "Mensaje en blanco",
     },
+    mfa: {
+      section_title: "Verificación en dos pasos",
+      status_on:
+        "Activa en %{smart_count} dispositivo |||| Activa en %{smart_count} dispositivos",
+      status_off: "No activa. Al iniciar sesión solo se pide tu contraseña.",
+      setup: "Configurar verificación en dos pasos",
+      add_device: "Agregar otro dispositivo",
+      remove: "Quitar",
+      removed: "Dispositivo quitado",
+      remove_error:
+        "No se pudo quitar. Cierra sesión, vuelve a entrar con tu código e inténtalo de nuevo.",
+      title_enroll: "Configurar verificación en dos pasos",
+      title_verify: "Verificación en dos pasos",
+      enroll_step1:
+        "1. Abre tu app autenticadora (Google Authenticator, Microsoft Authenticator, 1Password, Bitwarden…) y escanea este código QR.",
+      enroll_manual: "¿No puedes escanear? Escribe esta clave en la app:",
+      enroll_step2: "2. Escribe el código de 6 dígitos que muestra la app.",
+      qr_alt: "Código QR para la app autenticadora",
+      verify_hint: "Escribe el código de 6 dígitos de tu app autenticadora.",
+      code: "Código",
+      activate: "Activar",
+      verify: "Verificar",
+      invalid_code:
+        "Código incorrecto o vencido. Escribe el siguiente que muestre la app.",
+      error:
+        "No se pudo cargar la verificación. Recarga la página o cierra sesión e inténtalo de nuevo.",
+      already: "La verificación en dos pasos ya está activa en esta sesión.",
+      back: "Volver al CRM",
+    },
     clients: {
       title: "Clientes",
       prospects: "Prospectos",

@@ -28,6 +28,7 @@ import { ImportPage } from "../misc/ImportPage";
 import { ChangelogPage } from "../misc/ChangelogPage";
 import { ClientList } from "../clients/ClientList";
 import { MessagesPage } from "../messages/MessagesPage";
+import { MfaPage } from "../login/MfaPage";
 import {
   getAuthProvider as defaultAuthProviderBuilder,
   getDataProvider as defaultDataProviderBuilder,
@@ -256,6 +257,7 @@ const DesktopAdmin = (
           element={<ForgotPasswordPage />}
         />
         <Route path={OAuthConsentPage.path} element={<OAuthConsentPage />} />
+        <Route path={MfaPage.path} element={<MfaPage />} />
       </CustomRoutes>
 
       <CustomRoutes>
@@ -333,6 +335,7 @@ const MobileAdmin = (
             element={<ForgotPasswordPage />}
           />
           <Route path={OAuthConsentPage.path} element={<OAuthConsentPage />} />
+          <Route path={MfaPage.path} element={<MfaPage />} />
         </CustomRoutes>
         <CustomRoutes>
           <Route

@@ -2,6 +2,7 @@ import type { AuthProvider } from "ra-core";
 import { supabaseAuthProvider } from "ra-supabase-core";
 
 import { canAccess } from "../commons/canAccess";
+import { MFA_PATH, needsMfaStep } from "../../login/mfa";
 import { getSupabaseClient } from "./supabase";
 
 const getBaseAuthProvider = () =>
@@ -141,7 +142,14 @@ export const getAuthProvider = (): AuthProvider => {
         };
       }
 
-      return baseAuthProvider.checkAuth(params);
+      await baseAuthProvider.checkAuth(params);
+
+      // Password alone is not enough once a factor is enrolled
+      const { data: aal } =
+        await getSupabaseClient().auth.mfa.getAuthenticatorAssuranceLevel();
+      if (aal && needsMfaStep(aal)) {
+        throw { redirectTo: MFA_PATH, message: false };
+      }
     },
     canAccess: async (params) => {
       const isInitialized = await getIsInitialized();
