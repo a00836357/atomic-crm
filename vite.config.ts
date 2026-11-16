@@ -28,7 +28,10 @@ export default defineConfig({
       },
     }),
     VitePWA({
-      registerType: "autoUpdate",
+      // New versions wait for src/registerPwa.ts to apply them (reload on
+      // open, or the UpdateNotice button), instead of a silent swap.
+      registerType: "prompt",
+      injectRegister: false,
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MiB

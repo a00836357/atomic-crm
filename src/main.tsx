@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
+import { registerPwa } from "./registerPwa";
 
 // After a new deploy, the service worker may replace its pre-cache while
 // the page still holds old chunk references. A reload picks up the new
@@ -14,6 +15,8 @@ window.addEventListener("vite:preloadError", () => {
     window.location.reload();
   }
 });
+
+registerPwa();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

@@ -8,6 +8,7 @@ import { DataImportProvider } from "../dataImport/DataImportProvider";
 import { MfaGuard } from "../login/MfaGuard";
 import { useConfigurationLoader } from "../root/useConfigurationLoader";
 import Header from "./Header";
+import { UpdateNotice } from "./UpdateNotice";
 
 export const Layout = ({ children }: { children: ReactNode }) => {
   useConfigurationLoader();
@@ -25,6 +26,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
           </ErrorBoundary>
         </main>
         <Notification />
+        <UpdateNotice />
       </DataImportProvider>
     </MfaGuard>
   );

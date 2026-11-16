@@ -9,6 +9,7 @@ import { MfaGuard } from "../login/MfaGuard";
 import { useConfigurationLoader } from "../root/useConfigurationLoader";
 import { MobileNavigation } from "./MobileNavigation";
 import { PullToRefresh } from "./PullToRefresh";
+import { UpdateNotice } from "./UpdateNotice";
 
 export const MobileLayout = ({ children }: { children: ReactNode }) => {
   useConfigurationLoader();
@@ -23,6 +24,8 @@ export const MobileLayout = ({ children }: { children: ReactNode }) => {
         </ErrorBoundary>
         <MobileNavigation />
         <Notification mobileOffset={{ bottom: "72px" }} />
+        {/* above the bottom navigation bar */}
+        <UpdateNotice className="bottom-20" />
       </DataImportProvider>
     </MfaGuard>
   );
